@@ -1,0 +1,10 @@
+.navbar {
+  box-shadow: 1px 3px 5px lightgrey;
+  background-color: #83c5be;
+  a {
+    color: white;
+    &:hover {
+      color: #edf6f9;
+    }
+  }
+}

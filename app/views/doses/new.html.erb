@@ -1,0 +1,9 @@
+<div class="container mt-3">
+  <h1>Create a new dose for <%= link_to @cocktail.name, cocktail_path(@cocktail), class:'text-decoration-none' %></h1>
+
+  <%= simple_form_for [@cocktail, @dose] do |f| %>
+    <%= f.input :description %>
+    <%= f.association :ingredient, collection: Ingredient.order('name ASC') %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  <% end %>
+</div>
