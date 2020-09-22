@@ -2,20 +2,29 @@
   <h1> <%= @cocktail.name %></h1>
 </div>
 <div>
-  <div class="container mt-3">
-    <h2>Ingredients</h2>
-  </br>
-    <% @cocktail.doses.each do |dose| %>
-      <p>
-        <%= dose.ingredient.name %>
-        (<%= dose.description %>)
-        <%= link_to "Delete",
-                    dose_path(dose),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" } %>
-      </p>
-    <% end %>
-  </br>
-    <%= link_to 'Add a dose', new_cocktail_dose_path(@cocktail), class:'btn text-decoration-none' %>
+  <div class="container-fluid mt-3 d-flex justify-content-around">
+    <div class="ingredients">
+      <h2>Ingredients</h2>
+      </br>
+      <% @cocktail.doses.each do |dose| %>
+        <p>
+          <%= dose.ingredient.name %>
+          (<%= dose.description %>)
+          <%= link_to "Delete",
+                      dose_path(dose),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %>
+        </p>
+      <% end %>
+    </div>
+    </br>
+    <div class="dose-form">
+      <h3>New dose</h3>
+      <%= simple_form_for [@cocktail, @dose] do |f| %>
+        <%= f.input :description %>
+        <%= f.association :ingredient, collection: Ingredient.order('name ASC') %>
+        <%= f.button :submit, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
 </div>
